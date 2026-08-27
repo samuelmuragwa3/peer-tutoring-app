@@ -1,122 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import SessionList from './components/SessionList';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [sessions, setSessions] = useState([
+    {
+      id: 1,
+      course: 'CSIS 3290',
+      day: 'Wed',
+      time: '3:00 PM',
+      title: 'Gradient Boosting & Ensemble Methods',
+      tutor: 'John Smith',
+      capacity: 6,
+      participants: ['Priya', 'Jaden', 'Kayla', 'Sofia', 'Aiden', 'Tao'],
+    },
+    {
+      id: 2,
+      course: 'MATH 1200',
+      day: 'Thu',
+      time: '1:00 PM',
+      title: 'Related Rates Problem Set Review',
+      tutor: 'Devon K.',
+      capacity: 5,
+      participants: ['Maya', 'Aiden', 'Sofia', 'Liam', 'Emma'],
+    },
+    {
+      id: 3,
+      course: 'ACCT 1110',
+      day: 'Thu',
+      time: '4:30 PM',
+      title: 'Adjusting Entries & Trial Balances',
+      tutor: 'Rita P.',
+      capacity: 4,
+      participants: ['Noah', 'Grace'],
+    },
+    {
+      id: 4,
+      course: 'ENGL 1130',
+      day: 'Fri',
+      time: '11:00 AM',
+      title: 'Essay Structure Workshop',
+      tutor: 'Owen T.',
+      capacity: 6,
+      participants: ['Aiden', 'Liam', 'Raj'],
+    },
+  ]);
+
+  const [selectedCourse, setSelectedCourse] = useState('All');
+
+  function handleJoin(sessionId, participantName) {
+    setSessions(prevSessions =>
+      prevSessions.map(session =>
+        session.id === sessionId
+          ? { ...session, participants: [...session.participants, participantName] }
+          : session
+      )
+    );
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <div className="app">
+      <h1>Open Study Sessions</h1>
+      <SessionList sessions={sessions} filter={selectedCourse} onJoin={handleJoin} />
+    </div>
+  );
 }
 
-export default App
+export default App;
