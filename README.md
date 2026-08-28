@@ -23,11 +23,14 @@ Full-stack web app for browsing and joining peer-led study sessions with live ca
 ![Dashboard view](./docs/screenshots/dashboard.png)
 ![Filtered view](./docs/screenshots/filtered.png)
 
+
 ## Project Structure
 
+```
 peer-tutoring-app/
-client/ — React frontend (Vite)
-server/ — ASP.NET Core Web API backend
+  client/     — React frontend (Vite)
+  server/     — ASP.NET Core Web API backend
+```
 
 
 ## Running Locally
