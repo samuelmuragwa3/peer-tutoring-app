@@ -13,7 +13,9 @@ Full-stack web app for browsing and joining peer-led study sessions with live ca
 ## Tech Stack
 
 **Frontend:** React (Vite), plain CSS with CSS custom properties for theming
+
 **Backend:** ASP.NET Core Web API (C#) — *in progress*
+
 **Planned:** routing (login, dashboard, session details), persistent data storage
 
 ## Screenshots
