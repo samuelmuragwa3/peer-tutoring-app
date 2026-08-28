@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css';
+import FilterTabs from './components/FilterTabs';
 import SessionList from './components/SessionList';
 
 function App() {
@@ -48,6 +49,8 @@ function App() {
 
   const [selectedCourse, setSelectedCourse] = useState('All');
 
+  const courseOptions = ['All', ...new Set(sessions.map(s => s.course))];
+
   function handleJoin(sessionId, participantName) {
     setSessions(prevSessions =>
       prevSessions.map(session =>
@@ -61,6 +64,11 @@ function App() {
   return (
     <div className="app">
       <h1>Open Study Sessions</h1>
+      <FilterTabs
+        courses={courseOptions}
+        selectedCourse={selectedCourse}
+        onSelect={setSelectedCourse}
+      />
       <SessionList sessions={sessions} filter={selectedCourse} onJoin={handleJoin} />
     </div>
   );
